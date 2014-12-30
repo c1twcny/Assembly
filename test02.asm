@@ -5,38 +5,38 @@ section  .data ;Data segment
     lenDispMsg equ $-dispMsg                 
 
 section .bss            ;Uninitialized data
-    num resb 5
+    num resb 5		;reserve 5 bytes:see www.nasm.us/doc/nasmdoc3.html
 section .text           ;Code Segment
        global _start
        _start:
        ;User prompt
-       mov eax, 4
-       mov ebx, 1
+       mov eax, 4       ;sys_write <x86>
+       mov ebx, 1       ;fd (stdio)
        mov ecx, userMsg
        mov edx, lenUserMsg
-       int 80h
+       int 0x80
 
        ;Read and store the user input
-       mov eax, 3
+       mov eax, 3      ;sys_read <x86>
        mov ebx, 2
        mov ecx, num  
        mov edx, 5       ;5 bytes (numeric, 1 for sign) of that information
        int 80h
        ;Output the message 'The entered number is: '
-       mov eax, 4
-       mov ebx, 1
+       mov eax, 4       ;sys_write <x86>
+       mov ebx, 1       ;fd (stdout)
        mov ecx, dispMsg
        mov edx, lenDispMsg
-       int 80h  
+       int 0x80  
 
        ;Output the number entered
-       mov eax, 4
-       mov ebx, 1
+       mov eax, 4       ;sys_write <x86>
+       mov ebx, 1       ;fd (stdout)
        mov ecx, num
        mov edx, 5
-       int 80h  
+       int 0x80  
 ; Exit code
-       mov eax, 1
-       mov ebx, 0
-       int 80h
+       mov eax, 1    ;sys_exit code <x86>
+       mov ebx, 0    ;error code <x86>
+       int 0x80	     ;invoke kernel
 
