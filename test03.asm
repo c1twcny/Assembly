@@ -10,7 +10,10 @@
 ; everything in {} is an optional field
 ;
 ; Note:
-; (1) Following codes are for X86_64 architecture
+; (1) Following codes are using X86 registers and will be compiled and linked
+;     via the following commands:
+;     nasm -f elf32 -o test03.o test03.asm
+;     ld -m elf_i386 -o test03 test03.o
 ; (2) Reference https://filippo.io/linux-syscall-table/ for detail info on
 ;     syscall/rax opcode mapping
 ; 
