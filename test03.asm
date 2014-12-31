@@ -18,10 +18,10 @@
 
 
 section .data
-    msg db 'Display 9 starts', `\n` ;using backquote for special character
-    len equ $-msg
-    s2 times 9 db '*'
-    s3 db `\n`
+    msg: db 'Display 10 stars', `\n` ;using backquote for special character
+    len: equ $-msg
+    s2:  times 10 db '*'
+    s3:  db `\n`
 
 section .bss
 
@@ -39,7 +39,7 @@ _start:
     mov eax, 4	;sys_write
     mov ebx, 1	;fd (stdout)
     mov ecx, s2
-    mov edx, 9
+    mov edx, 10 
     int 0x80
 
 ;Put the newline character at the end of '*'
